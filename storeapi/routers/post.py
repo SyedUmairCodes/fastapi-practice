@@ -1,3 +1,4 @@
+# Imports
 from fastapi import APIRouter, HTTPException
 
 from storeapi.models.post import (
@@ -8,16 +9,19 @@ from storeapi.models.post import (
     UserPostWithComments,
 )
 
+# Router object
 router = APIRouter()
-
+# Using dictionaries as temporary DB
 post_table = {}
 comment_table = {}
 
 
+# Method to find posts with their IDs
 def find_post(post_id: int):
     return post_table.get(post_id)
 
 
+# POST route for posts
 @router.post("/post", response_model=UserPost, status_code=201)
 async def create_post(post: UserPostIn):
     data = post.model_dump()
@@ -27,11 +31,13 @@ async def create_post(post: UserPostIn):
     return new_post
 
 
+# GET route for posts
 @router.get("/post", response_model=list[UserPost])
 async def get_all_posts():
     return list(post_table.values())
 
 
+# POST route for comments
 @router.post("/comment", response_model=Comment, status_code=201)
 async def create_comment(comment: CommentIn):
     post = find_post(comment.post_id)
@@ -44,6 +50,7 @@ async def create_comment(comment: CommentIn):
     return new_comment
 
 
+# GET route for comments
 @router.get("/post/{post_id}/comment", response_model=list[Comment])
 async def get_comments_on_posts(post_id: int):
     return [
@@ -51,6 +58,7 @@ async def get_comments_on_posts(post_id: int):
     ]
 
 
+# GET route for getting posts with comments
 @router.get("/post/{post_id}", response_model=UserPostWithComments)
 async def get_post_with_comments(post_id: int):
     post = find_post(post_id)
