@@ -12,8 +12,6 @@ A basic social media API built using FastAPI for learning FastAPI, Pytest, and P
 
 ## TODO:
 
-- Add Postgres support(Not implemented yet)
-- Add logging(Not implemented yet)
 - User registration
 - User authentication and autherization
 - Email verification
