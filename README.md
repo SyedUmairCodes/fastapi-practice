@@ -9,11 +9,11 @@ A basic social media API built using FastAPI for learning FastAPI, Pytest, and P
 - Add post.
 - Add comments.
 - Get comments on a post.
+- Create new user
+
 
 ## TODO:
 
-- User registration
-- User authentication and autherization
 - Email verification
 - Image generation (Maybe)
 

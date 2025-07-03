@@ -51,8 +51,6 @@ def configure_logging() -> None:
                 "file": {
                     "class": "pythonjsonlogger.jsonlogger.JsonFormatter",
                     "datefmt": "%Y-%m-%dT%H:%M:%S",
-                    # For JsonFormatter, the format string just defines what keys are included in the log record
-                    # It's a bit clunky, but it's the way to do it for now
                     "format": "%(asctime)s %(msecs)03d %(levelname)s %(correlation_id)s %(name)s %(lineno)d %(message)s",
                 },
             },
@@ -69,7 +67,7 @@ def configure_logging() -> None:
                     "level": "DEBUG",
                     "formatter": "console",
                     "filters": ["correlation_id", "email_obfuscation"],
-                    "source_token": config.LOGTAIL_API_KEY,  # gets passed to LogtailHandler constructor as kwargs
+                    "source_token": config.LOGTAIL_API_KEY,
                 },
                 "rotating_file": {
                     "class": "logging.handlers.RotatingFileHandler",
